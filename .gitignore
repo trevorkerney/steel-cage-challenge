@@ -1,0 +1,18 @@
+# Library
+# Logs
+# UserSettings
+# .vsconfig
+# CS 360 Wrestlemania.sln
+
+*
+
+!.gitignore
+
+!Assets
+!Assets/**
+
+!Packages
+!Packages/**
+
+!ProjectSettings
+!ProjectSettings/**
