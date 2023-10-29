@@ -65,11 +65,12 @@ public class Wrestler : MonoBehaviour
 
     private void FixedUpdate()
     {
-        controller.Delegate(this, ringCollider.bounds);
-    }
-
-    public void Punch()
-    {
-
-    }
+        // controller.Delegate(this);
+        moveDir = playerControls.ReadValue<Vector2>();
+        moveDir.Normalize();
+        Vector2 newPos = moveSpeed * moveDir + rb.position;
+        newPos.x = Mathf.Clamp(newPos.x, ringCollider.bounds.min.x + cl.bounds.size.x / 2, ringCollider.bounds.max.x - cl.bounds.size.x / 2);
+        newPos.y = Mathf.Clamp(newPos.y, ringCollider.bounds.min.y + cl.bounds.size.y / 2, ringCollider.bounds.max.y - cl.bounds.size.y / 2);
+        rb.MovePosition(newPos);
+    }   
 }
