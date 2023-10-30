@@ -9,6 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/StartMenu.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: 6d7a5dec8e1403b48a610a965d7136b5
+  - enabled: 1
+    path: Assets/Scenes/WrestlerSelectionPVC.unity
+    guid: 822475a978a16d049b90feec70b02ba2
+  - enabled: 1
+    path: Assets/Scenes/WrestlerSelectionPVP.unity
+    guid: 329c20b00d6eeb44f94e99d77bce32b5
+  - enabled: 1
     path: Assets/Scenes/RegisterMenu.unity
     guid: e44493d3dda460944b015ce372d94ae3
   - enabled: 1
