@@ -3,7 +3,6 @@ using UnityEngine.SceneManagement;
 
 public class StartMenu : MonoBehaviour
 {
-    private Database db;
     private Session session;
 
     public GameObject noPlayersInput;
@@ -12,7 +11,6 @@ public class StartMenu : MonoBehaviour
 
     void Awake()
     {
-        db = FindObjectOfType<Database>();
         session = FindObjectOfType<Session>();
     }
 
@@ -50,7 +48,7 @@ public class StartMenu : MonoBehaviour
 
     public void LoadGame()
     {
-        SceneManager.LoadScene("");
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void LogoutPlayer()

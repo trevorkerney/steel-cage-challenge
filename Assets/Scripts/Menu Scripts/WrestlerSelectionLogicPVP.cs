@@ -3,6 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class PVPWrestler
@@ -81,6 +82,6 @@ public class WrestlerSelectionLogicPVP : MonoBehaviour
     IEnumerator TransitionToNextScene()
     {
         yield return new WaitForSeconds(3f);
-        // Load the next scene here using SceneManager.LoadScene()
+        SceneManager.LoadScene("Match");
     }
 }

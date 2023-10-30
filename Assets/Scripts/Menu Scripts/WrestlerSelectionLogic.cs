@@ -7,7 +7,7 @@ using System.Collections;
 
 
 [System.Serializable]
-public class Wrestler
+public class WrestlerOption
 {
     public string name;
     public Sprite image;
@@ -15,7 +15,7 @@ public class Wrestler
 
 public class WrestlerSelectionLogic : MonoBehaviour
 {
-    public List<Wrestler> availableWrestlers;
+    public List<WrestlerOption> availableWrestlers;
     public Sprite playerImage;
     public TextMeshProUGUI playerTitle;
     public Sprite computerImage;
@@ -62,7 +62,7 @@ public class WrestlerSelectionLogic : MonoBehaviour
    private void SelectForComputer()
     {
         // Temporarily remove the player's choice from the list
-        Wrestler playerChoice = availableWrestlers[currentPlayerSelection];
+        WrestlerOption playerChoice = availableWrestlers[currentPlayerSelection];
         availableWrestlers.RemoveAt(currentPlayerSelection);
 
         // Pick a random wrestler for the computer
