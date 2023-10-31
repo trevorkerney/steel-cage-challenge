@@ -1,63 +1,39 @@
-using System.Drawing;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-public class Wrestler : MonoBehaviour
+public class Wrestler : MonoBehaviour, ILossSubject
 {
-    public IWrestlerController controller;
-    public InputAction playerControls;
-    public Animator animator;
+    public WASDController controller;
+    
+    // [HideInInspector]
+    public BoxCollider2D boundary;
+    // [HideInInspector]
+    public Wrestler opponent;
+
     public SpriteRenderer rndr;
-
-    public BoxCollider2D ringCollider;
-
+    public Animator animator;
     public Rigidbody2D rb;
     public BoxCollider2D cl;
 
-    [SerializeField]
-    public float moveSpeed = 0.02f;
-    [SerializeField]
     public int strength = 100;
+    public float moveSpeed = 0.02f;
 
     public Vector2 moveDir = Vector2.zero;
 
-    public Transform opponent;
-
-    private void OnEnable()
-    {
-        playerControls.Enable();
-    }
-
-    private void OnDisable()
-    {
-        playerControls.Disable();
-    }
-
-    void Start()
-    {
-        ringCollider = transform.parent.Find("Ring").Find("RingBG").GetComponent<BoxCollider2D>();
-        rb = GetComponent<Rigidbody2D>();
-        cl = GetComponent<BoxCollider2D>();
-        animator = GetComponent<Animator>();
-        rndr = GetComponent<SpriteRenderer>();
-        opponent = transform.parent.Find("W2");
-    }
-
     void Update()
     {
-        animator.SetFloat("Ydiff", opponent.position.y - rb.position.y);
+        animator.SetFloat("Ydiff", opponent.transform.position.y - rb.position.y);
         
         if (moveDir.x != 0 || moveDir.y != 0)
             animator.SetBool("IsWalking", true);
         else
             animator.SetBool("IsWalking", false);
 
-        if (opponent.position.y - rb.position.y < 0)
+        if (opponent.transform.position.y - rb.position.y < 0)
             rndr.sortingOrder = 0;
         else
             rndr.sortingOrder = 2;
 
-        if (opponent.position.x - rb.position.x < 0)
+        if (opponent.transform.position.x - rb.position.x < 0)
             rndr.flipX = true;
         else
             rndr.flipX = false;
@@ -65,12 +41,56 @@ public class Wrestler : MonoBehaviour
 
     private void FixedUpdate()
     {
-        // controller.Delegate(this);
-        moveDir = playerControls.ReadValue<Vector2>();
-        moveDir.Normalize();
-        Vector2 newPos = moveSpeed * moveDir + rb.position;
-        newPos.x = Mathf.Clamp(newPos.x, ringCollider.bounds.min.x + cl.bounds.size.x / 2, ringCollider.bounds.max.x - cl.bounds.size.x / 2);
-        newPos.y = Mathf.Clamp(newPos.y, ringCollider.bounds.min.y + cl.bounds.size.y / 2, ringCollider.bounds.max.y - cl.bounds.size.y / 2);
-        rb.MovePosition(newPos);
-    }   
+        controller.Delegate(this, opponent, boundary.bounds);
+    }
+
+    void OnDestroy()
+    {
+        if (controller != null)
+        {
+            Destroy(controller as Object);
+        }
+    }
+
+    public void AddObserver(ILossObserver observer)
+    {
+
+    }
+
+    public void RemoveObserver(ILossObserver observer)
+    {
+        
+    }
+
+    public void Notify(int player)
+    {
+
+    }
+
+    public void LoseStrength(int loss)
+    {
+        if (strength <= loss)
+        {
+            strength = 0;
+        }
+        else
+        {
+            strength -= loss;
+        }
+    }
+
+    public void Punch()
+    {
+        animator.SetTrigger("Punch");
+    }
+
+    public void Kick()
+    {
+        animator.SetTrigger("Kick");
+    }
+
+    public void Pin()
+    {
+
+    }
 }
