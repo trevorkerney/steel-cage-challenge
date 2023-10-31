@@ -18,6 +18,7 @@ public class Database : MonoBehaviour
             Destroy(gameObject);
             return;
         }
+
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
@@ -67,5 +68,17 @@ public class Database : MonoBehaviour
             return false;
         }
         return true;
+    }
+
+    public bool RecordWin(string username) {
+        return false;
+    }
+
+    public bool RecordLoss(string username) {
+        return false;
+    }
+
+    public bool RecordTime(string username, int ms) {
+        return false;
     }
 }

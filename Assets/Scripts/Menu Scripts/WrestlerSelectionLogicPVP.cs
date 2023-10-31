@@ -5,16 +5,10 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-[System.Serializable]
-public class PVPWrestler
-{
-    public string wrestlerName;
-    public Sprite wrestlerImage;
-}
-
 public class WrestlerSelectionLogicPVP : MonoBehaviour
 {
-    public List<PVPWrestler> availableWrestlers;
+    private Session session;
+
     public Image playerOneImageDisplay;
     public TextMeshProUGUI playerOneTitleDisplay;
     public Image playerTwoImageDisplay;
@@ -22,6 +16,11 @@ public class WrestlerSelectionLogicPVP : MonoBehaviour
 
     private int currentP1Selection = 0;
     private int currentP2Selection = 1; 
+
+    void Awake()
+    {
+        session = FindObjectOfType<Session>();
+    }
 
     private void Update()
     {
@@ -55,33 +54,35 @@ public class WrestlerSelectionLogicPVP : MonoBehaviour
         if (isIncrement)
         {
             currentIndex++;
-            if (currentIndex >= availableWrestlers.Count)
+            if (currentIndex >= session.wrestlers.Count)
                 currentIndex = 0;
         }
         else
         {
             currentIndex--;
             if (currentIndex < 0)
-                currentIndex = availableWrestlers.Count - 1;
+                currentIndex = session.wrestlers.Count - 1;
         }
         return currentIndex;
     }
 
     private void UpdatePlayerOneSelection()
     {
-        playerOneImageDisplay.sprite = availableWrestlers[currentP1Selection].wrestlerImage;
-        playerOneTitleDisplay.text = availableWrestlers[currentP1Selection].wrestlerName;
+        playerOneImageDisplay.sprite = session.wrestlers[currentP1Selection].portrait;
+        playerOneTitleDisplay.text = session.wrestlers[currentP1Selection].name;
     }
 
     private void UpdatePlayerTwoSelection()
     {
-        playerTwoImageDisplay.sprite = availableWrestlers[currentP2Selection].wrestlerImage;
-        playerTwoTitleDisplay.text = availableWrestlers[currentP2Selection].wrestlerName;
+        playerTwoImageDisplay.sprite = session.wrestlers[currentP2Selection].portrait;
+        playerTwoTitleDisplay.text = session.wrestlers[currentP2Selection].name;
     }
 
     IEnumerator TransitionToNextScene()
     {
-        yield return new WaitForSeconds(3f);
+        session.option1 = currentP1Selection;
+        session.option2 = currentP2Selection;
+        yield return new WaitForSeconds(1f);
         SceneManager.LoadScene("Match");
     }
 }

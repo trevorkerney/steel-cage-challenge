@@ -4,5 +4,5 @@ using UnityEngine;
 
 public interface IWrestlerController
 {
-    void Delegate(Wrestler wrestler, Bounds boundary);
+    void Delegate(Wrestler wrestler, Wrestler opponent, Bounds boundary);
 }

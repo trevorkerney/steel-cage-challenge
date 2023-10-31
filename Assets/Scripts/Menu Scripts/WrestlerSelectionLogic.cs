@@ -4,15 +4,6 @@ using UnityEngine.UI;
 using TMPro;
 using System.Collections;
 
-
-
-[System.Serializable]
-public class WrestlerOption
-{
-    public string name;
-    public Sprite image;
-}
-
 public class WrestlerSelectionLogic : MonoBehaviour
 {
     public List<WrestlerOption> availableWrestlers;
@@ -54,7 +45,7 @@ public class WrestlerSelectionLogic : MonoBehaviour
 
     private void UpdatePlayerSelection()
     {
-        playerImage = availableWrestlers[currentPlayerSelection].image;
+        playerImage = availableWrestlers[currentPlayerSelection].portrait;
         playerTitle.text = availableWrestlers[currentPlayerSelection].name;
         playerImageUI.sprite = playerImage;  // Update the UI Image component with the new sprite
     }
@@ -67,7 +58,7 @@ public class WrestlerSelectionLogic : MonoBehaviour
 
         // Pick a random wrestler for the computer
         int randomIndex = Random.Range(0, availableWrestlers.Count);
-        computerImage = availableWrestlers[randomIndex].image;
+        computerImage = availableWrestlers[randomIndex].portrait;
         computerTitle.text = availableWrestlers[randomIndex].name;
         computerImageUI.sprite = computerImage;
 

@@ -5,9 +5,27 @@ using UnityEngine.SceneManagement;
 
 public class MenuController : MonoBehaviour
 {
-    public void LoadSceneByName(string sceneName){
-        if(!string.IsNullOrEmpty(sceneName)){
-            SceneManager.LoadScene(sceneName);
+    private Session session;
+
+    void Awake()
+    {
+        session = FindObjectOfType<Session>();
+    }
+
+    public void LoadSceneByName(string scene){
+        if (!string.IsNullOrEmpty(scene))
+        {
+            if (scene == "WrestlerSelectionPVC")
+            {
+                session.category = Category.PvC;
+                session.gamemode = Gamemode.OvO;
+            }
+            if (scene == "WrestlerSelectionPVP")
+            {
+                session.category = Category.PvP;
+                session.gamemode = Gamemode.OvO;
+            }
+            SceneManager.LoadScene(scene);
         }
     }
     
