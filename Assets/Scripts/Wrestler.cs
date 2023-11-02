@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Wrestler : MonoBehaviour, ILossSubject
 {
-    public WASDController controller;
+    public IWrestlerController controller;
     
     // [HideInInspector]
     public BoxCollider2D boundary;
@@ -42,6 +42,19 @@ public class Wrestler : MonoBehaviour, ILossSubject
     private void FixedUpdate()
     {
         controller.Delegate(this, opponent, boundary.bounds);
+        moveDir.Normalize();
+        Vector2 newPos = moveSpeed * moveDir + rb.position;
+        newPos.x = Mathf.Clamp(
+            newPos.x,
+            boundary.bounds.min.x + cl.bounds.size.x / 2,
+            boundary.bounds.max.x - cl.bounds.size.x / 2
+        );
+        newPos.y = Mathf.Clamp(
+            newPos.y,
+            boundary.bounds.min.y + cl.bounds.size.y / 2,
+            boundary.bounds.max.y - cl.bounds.size.y / 2
+        );
+        rb.MovePosition(newPos);
     }
 
     void OnDestroy()

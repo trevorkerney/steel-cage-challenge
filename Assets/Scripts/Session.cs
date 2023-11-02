@@ -54,6 +54,7 @@ public class Session : MonoBehaviour
     [HideInInspector]
     public int option2;
 
+    [HideInInspector]
     public bool cage = false;
 
     void Awake()
