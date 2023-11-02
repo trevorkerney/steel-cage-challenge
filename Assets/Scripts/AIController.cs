@@ -2,20 +2,14 @@ using UnityEngine;
 
 public class AIController : MonoBehaviour, IWrestlerController
 {
+    private bool called = false;
+
     public void Delegate(Wrestler wrestler, Wrestler opponent, Bounds boundary)
     {
-        throw new System.NotImplementedException();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (!called)
+        {
+            Debug.Log("AI Controller not yet implemented");
+            called = true;
+        }
     }
 }
