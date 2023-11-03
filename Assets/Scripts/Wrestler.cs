@@ -4,57 +4,65 @@ public class Wrestler : MonoBehaviour, ILossSubject
 {
     public IWrestlerController controller;
     
-    // [HideInInspector]
+    // defined at runtime
+    [HideInInspector]
     public BoxCollider2D boundary;
-    // [HideInInspector]
+    [HideInInspector]
     public Wrestler opponent;
-
-    public SpriteRenderer rndr;
+    [HideInInspector]
     public Animator animator;
-    public Rigidbody2D rb;
-    public BoxCollider2D cl;
 
-    public int strength = 100;
-    public float moveSpeed = 0.02f;
+    // defined at compile
+    [SerializeField]
+    private SpriteRenderer rend;
+    [SerializeField]
+    private Rigidbody2D phys;
+    [SerializeField]
+    private BoxCollider2D body;
 
+    [SerializeField]
+    private int strength = 100;
+    [SerializeField]
+    private float moveSpeed = 0.02f;
+    [HideInInspector]
     public Vector2 moveDir = Vector2.zero;
 
     void Update()
     {
-        animator.SetFloat("Ydiff", opponent.transform.position.y - rb.position.y);
+        animator.SetFloat("Ydiff", opponent.transform.position.y - phys.position.y);
         
         if (moveDir.x != 0 || moveDir.y != 0)
             animator.SetBool("IsWalking", true);
         else
             animator.SetBool("IsWalking", false);
 
-        if (opponent.transform.position.y - rb.position.y < 0)
-            rndr.sortingOrder = 0;
+        if (opponent.transform.position.y - phys.position.y < 0)
+            rend.sortingOrder = 0;
         else
-            rndr.sortingOrder = 2;
+            rend.sortingOrder = 2;
 
-        if (opponent.transform.position.x - rb.position.x < 0)
-            rndr.flipX = true;
+        if (opponent.transform.position.x - phys.position.x < 0)
+            rend.flipX = true;
         else
-            rndr.flipX = false;
+            rend.flipX = false;
     }
 
     private void FixedUpdate()
     {
-        controller.Delegate(this, opponent, boundary.bounds);
+        controller.Delegate(this);
         moveDir.Normalize();
-        Vector2 newPos = moveSpeed * moveDir + rb.position;
+        Vector2 newPos = moveSpeed * moveDir + phys.position;
         newPos.x = Mathf.Clamp(
             newPos.x,
-            boundary.bounds.min.x + cl.bounds.size.x / 2,
-            boundary.bounds.max.x - cl.bounds.size.x / 2
+            boundary.bounds.min.x + body.bounds.size.x / 2,
+            boundary.bounds.max.x - body.bounds.size.x / 2
         );
         newPos.y = Mathf.Clamp(
             newPos.y,
-            boundary.bounds.min.y + cl.bounds.size.y / 2,
-            boundary.bounds.max.y - cl.bounds.size.y / 2
+            boundary.bounds.min.y + body.bounds.size.y / 2,
+            boundary.bounds.max.y - body.bounds.size.y / 2
         );
-        rb.MovePosition(newPos);
+        phys.MovePosition(newPos);
     }
 
     void OnDestroy()
@@ -100,6 +108,11 @@ public class Wrestler : MonoBehaviour, ILossSubject
     public void Kick()
     {
         animator.SetTrigger("Kick");
+    }
+
+    public void Hit()
+    {
+        animator.SetTrigger("Hit");
     }
 
     public void Pin()

@@ -14,6 +14,9 @@ public class Match : MonoBehaviour
 
     public BoxCollider2D boundary;
 
+    public StrengthBar strength1;
+    public StrengthBar strength2;
+
     private Wrestler wrestler1;
     private Wrestler wrestler2;
     

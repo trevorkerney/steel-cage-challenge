@@ -3472,22 +3472,14 @@ MonoBehaviour:
   wrestlers:
   - name: Hulk Hogan
     portrait: {fileID: 21300000, guid: d8757c0104a28464eb0b6124edb15a82, type: 3}
-    nameSprite: {fileID: 21300000, guid: 6c1954490fdea024fa59961b6c7a2fc8, type: 3}
+    nameSprite: {fileID: 21300000, guid: afca24261b65bc94ba349f988ff103da, type: 3}
     animator: {fileID: 9100000, guid: 17982a91a3e57c34f9e03c3b6f87a3ca, type: 2}
   - name: Randy Savage
     portrait: {fileID: 21300000, guid: 784a6f7a4586c8f408c534eb48019ebd, type: 3}
-    nameSprite: {fileID: 21300000, guid: 858ea078f14dee546b3f5c3ad011355b, type: 3}
+    nameSprite: {fileID: 21300000, guid: 5f255d173987dbd4085db2a42ee4b4a5, type: 3}
     animator: {fileID: 9100000, guid: 17982a91a3e57c34f9e03c3b6f87a3ca, type: 2}
-  option1:
-    name: 
-    portrait: {fileID: 0}
-    nameSprite: {fileID: 0}
-    animator: {fileID: 0}
-  option2:
-    name: 
-    portrait: {fileID: 0}
-    nameSprite: {fileID: 0}
-    animator: {fileID: 0}
+  option1: 0
+  option2: 0
   cage: 0
 --- !u!4 &1518728912
 Transform:

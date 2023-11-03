@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -20,7 +18,7 @@ public class MenuController : MonoBehaviour
                 session.category = Category.PvC;
                 session.gamemode = Gamemode.OvO;
             }
-            if (scene == "WrestlerSelectionPVP")
+            if (scene == "WrestlerSelection")
             {
                 session.category = Category.PvP;
                 session.gamemode = Gamemode.OvO;

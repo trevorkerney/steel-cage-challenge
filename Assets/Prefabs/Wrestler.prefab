@@ -193,61 +193,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9752f687810811348b70814309c9837f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerControls:
-    m_Name: Player Controls
-    m_Type: 0
-    m_ExpectedControlType: 
-    m_Id: 32f60f9f-26f2-47e4-a4c9-50f7d1dfadf8
-    m_Processors: 
-    m_Interactions: 
-    m_SingletonActionBindings:
-    - m_Name: WASD
-      m_Id: 07bd2dab-7500-4482-a525-8e3d581fefcd
-      m_Path: 2DVector
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Player Controls
-      m_Flags: 4
-    - m_Name: up
-      m_Id: d660aaee-d01d-4d34-8e55-80d04cb0772c
-      m_Path: <Keyboard>/w
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Player Controls
-      m_Flags: 8
-    - m_Name: down
-      m_Id: 4c0cb11d-41de-4f9e-bace-4b49574424b4
-      m_Path: <Keyboard>/s
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Player Controls
-      m_Flags: 8
-    - m_Name: left
-      m_Id: 8c30f557-905d-4bb8-b42d-fde98fd3503b
-      m_Path: <Keyboard>/a
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Player Controls
-      m_Flags: 8
-    - m_Name: right
-      m_Id: 630b9129-681c-4660-8168-57034c97ac6e
-      m_Path: <Keyboard>/d
-      m_Interactions: 
-      m_Processors: 
-      m_Groups: 
-      m_Action: Player Controls
-      m_Flags: 8
-    m_Flags: 0
   boundary: {fileID: 0}
   opponent: {fileID: 0}
-  rndr: {fileID: 5614925349268211125}
   animator: {fileID: 4299765805752771488}
-  rb: {fileID: 8784469566780578914}
-  cl: {fileID: 6030756692066464785}
+  rend: {fileID: 5614925349268211125}
+  phys: {fileID: 8784469566780578914}
+  body: {fileID: 6030756692066464785}
   strength: 100
   moveSpeed: 0.02
   moveDir: {x: 0, y: 0}
