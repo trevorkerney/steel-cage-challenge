@@ -29,18 +29,22 @@ public class Wrestler : MonoBehaviour, ILossSubject
 
     void Update()
     {
+        // flip up or down animations depending on opponent location
         animator.SetFloat("Ydiff", opponent.transform.position.y - phys.position.y);
         
+        // trigger walk animation in movement vector > 0
         if (moveDir.x != 0 || moveDir.y != 0)
             animator.SetBool("IsWalking", true);
         else
             animator.SetBool("IsWalking", false);
 
+        // handle wrestlers' depth
         if (opponent.transform.position.y - phys.position.y < 0)
             rend.sortingOrder = 0;
         else
             rend.sortingOrder = 2;
 
+        // flip left or right animations depending on opponent location
         if (opponent.transform.position.x - phys.position.x < 0)
             rend.flipX = true;
         else
@@ -49,7 +53,10 @@ public class Wrestler : MonoBehaviour, ILossSubject
 
     private void FixedUpdate()
     {
+        // delegate input to controller
         controller.Delegate(this);
+
+        // apply motion vector
         moveDir.Normalize();
         Vector2 newPos = moveSpeed * moveDir + phys.position;
         newPos.x = Mathf.Clamp(
@@ -63,29 +70,6 @@ public class Wrestler : MonoBehaviour, ILossSubject
             boundary.bounds.max.y - body.bounds.size.y / 2
         );
         phys.MovePosition(newPos);
-    }
-
-    void OnDestroy()
-    {
-        if (controller != null)
-        {
-            Destroy(controller as Object);
-        }
-    }
-
-    public void AddObserver(ILossObserver observer)
-    {
-
-    }
-
-    public void RemoveObserver(ILossObserver observer)
-    {
-        
-    }
-
-    public void Notify(int player)
-    {
-
     }
 
     public void LoseStrength(int loss)
@@ -116,6 +100,21 @@ public class Wrestler : MonoBehaviour, ILossSubject
     }
 
     public void Pin()
+    {
+
+    }
+
+    public void AddObserver(ILossObserver observer)
+    {
+
+    }
+
+    public void RemoveObserver(ILossObserver observer)
+    {
+        
+    }
+
+    public void Notify(int player)
     {
 
     }
