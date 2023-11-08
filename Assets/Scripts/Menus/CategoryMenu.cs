@@ -5,9 +5,8 @@ public class CategoryMenu : MonoBehaviour
 {
     private Session session;
 
-    public GameObject PvCButton;
-    public GameObject PsvCButton;
-    public GameObject PvPButton;
+    public GameObject OnePlayerInput;
+    public GameObject TwoPlayerInput;
 
     void Awake()
     {
@@ -19,16 +18,14 @@ public class CategoryMenu : MonoBehaviour
         // if there are 2 authenticated players
         if (session.player2 != null)
         {
-            PvCButton.SetActive(false);
-            PsvCButton.SetActive(true);
-            PvPButton.SetActive(true);
+            OnePlayerInput.SetActive(false);
+            TwoPlayerInput.SetActive(true);
         }
         // if there is 1 authenticated player
         else if (session.player1 != null)
         {
-            PvCButton.SetActive(true);
-            PsvCButton.SetActive(false);
-            PvPButton.SetActive(false);
+            OnePlayerInput.SetActive(true);
+            TwoPlayerInput.SetActive(false);
         }
         // if there are no authenticated players
         else

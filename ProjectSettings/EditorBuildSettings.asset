@@ -17,9 +17,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CategoryMenu.unity
     guid: 6d7a5dec8e1403b48a610a965d7136b5
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/ModeMenu.unity
-    guid: 1a68b06bc3cbad844b7bfb2839680bb7
+    guid: e2f6b759ce6eeb348931d434ef84040e
+  - enabled: 1
+    path: Assets/Scenes/CageMenu.unity
+    guid: bba19f500258b6240abb79137223f4e8
   - enabled: 1
     path: Assets/Scenes/WrestlerMenu.unity
     guid: 329c20b00d6eeb44f94e99d77bce32b5

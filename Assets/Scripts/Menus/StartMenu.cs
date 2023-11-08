@@ -48,7 +48,18 @@ public class StartMenu : MonoBehaviour
 
     public void LoadGame()
     {
-        SceneManager.LoadScene("CategoryMenu");
+        if (session.player2 != null)
+        {
+            SceneManager.LoadScene("CategoryMenu");
+        }
+        else if (session.player1 != null)
+        {
+            Debug.Log("Single player disabled: AI Controller not yet implemented.");
+        }
+        else
+        {
+            Debug.Log("Somehow you tried to proceed to the category menu while no one was logged in.");
+        }
     }
 
     public void LogoutPlayer()
@@ -58,7 +69,7 @@ public class StartMenu : MonoBehaviour
         else if (session.player1 != null)
             session.player1 = null;
         else
-            Debug.Log("Somehow you clicked logout when no one was logged in.");
+            Debug.Log("Somehow you tried to log out when no one was logged in.");
     }
 
     public void Exit()
