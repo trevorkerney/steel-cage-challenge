@@ -43,8 +43,8 @@ public class Match : MonoBehaviour
         boundary = ring.transform.Find("Background").GetComponent<BoxCollider2D>();
 
         // instantiate wrestlers at their spawn points
-        wrestler1 = Instantiate(WrestlerPrefab, Wrestler1Spawn);
-        wrestler2 = Instantiate(WrestlerPrefab, Wrestler2Spawn);
+        wrestler1 = Instantiate(WrestlerPrefab, transform);
+        wrestler2 = Instantiate(WrestlerPrefab, transform);
 
         // assign animator controllers
         wrestler1.animator.runtimeAnimatorController = session.wrestlers[session.option1].animator;
@@ -58,18 +58,28 @@ public class Match : MonoBehaviour
         wrestler1.boundary = boundary;
         wrestler2.boundary = boundary;
 
+        // assign match references
+        wrestler1.match = this;
+        wrestler2.match = this;
+
         // assign controllers depending on how many players are logged in
-        wrestler1.controller = Instantiate(WASDInputPrefab, Wrestler1Spawn);
+        wrestler1.controller = Instantiate(WASDInputPrefab, transform);
         if (session.player2 != null)
         {
             // arrow input controller if player 2 logged in
-            wrestler2.controller = Instantiate(ArrowInputPrefab, Wrestler2Spawn);
+            wrestler2.controller = Instantiate(ArrowInputPrefab, transform);
         }
         else
         {
             // AI controller if player 2 not logged in
-            wrestler2.controller = Instantiate(AIInputPrefab, Wrestler2Spawn);
+            wrestler2.controller = Instantiate(AIInputPrefab, transform);
         }
+    }
+
+    void Update()
+    {
+        strength1.slider.value = wrestler1.strength;
+        strength2.slider.value = wrestler2.strength;
     }
 
     void OnDestroy()

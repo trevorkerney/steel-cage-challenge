@@ -566,54 +566,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1136867532}
   m_CullTransparentMesh: 1
---- !u!1 &1195611555
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1195611557}
-  - component: {fileID: 1195611556}
-  m_Layer: 0
-  m_Name: WrestlerSelectionManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1195611556
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1195611555}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d731112f71d2b44d82f38623d0a6d5b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player1Portrait: {fileID: 1396096917}
-  player1Name: {fileID: 909388527}
-  player2Portrait: {fileID: 355208889}
-  player2Name: {fileID: 958486356}
---- !u!4 &1195611557
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1195611555}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 459.45557, y: 237.46248, z: -8.822978}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1274767850
 GameObject:
   m_ObjectHideFlags: 0
@@ -722,6 +674,7 @@ GameObject:
   - component: {fileID: 1353373839}
   - component: {fileID: 1353373838}
   - component: {fileID: 1353373837}
+  - component: {fileID: 1353373840}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -814,6 +767,22 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &1353373840
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1353373835}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d731112f71d2b44d82f38623d0a6d5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  p1Portrait: {fileID: 1396096917}
+  p1Name: {fileID: 909388527}
+  p2Portrait: {fileID: 355208889}
+  p2Name: {fileID: 958486356}
 --- !u!1 &1373732017
 GameObject:
   m_ObjectHideFlags: 0
@@ -1065,4 +1034,3 @@ SceneRoots:
   - {fileID: 1274767851}
   - {fileID: 1353373836}
   - {fileID: 1095105377}
-  - {fileID: 1195611557}

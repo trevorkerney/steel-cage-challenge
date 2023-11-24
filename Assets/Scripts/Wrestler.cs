@@ -1,3 +1,5 @@
+using System.Collections;
+using System.ComponentModel;
 using UnityEngine;
 
 public class Wrestler : MonoBehaviour, ILossSubject
@@ -5,6 +7,8 @@ public class Wrestler : MonoBehaviour, ILossSubject
     public IWrestlerController controller;
     
     // defined at runtime
+    [HideInInspector]
+    public Match match;
     [HideInInspector]
     public BoxCollider2D boundary;
     [HideInInspector]
@@ -21,34 +25,46 @@ public class Wrestler : MonoBehaviour, ILossSubject
     private BoxCollider2D body;
 
     [SerializeField]
-    private int strength = 100;
+    public int strength = 100;
     [SerializeField]
     private float moveSpeed = 0.02f;
     [HideInInspector]
     public Vector2 moveDir = Vector2.zero;
 
+    float maxHitX = .2f;
+    float maxHitY = .1f;
+
+    bool stunned = false;
+    bool pinned = false;
+
+    int punchDamage = 5;
+    int kickDamage = 10;
+
     void Update()
     {
-        // flip up or down animations depending on opponent location
-        animator.SetFloat("Ydiff", opponent.transform.position.y - phys.position.y);
-        
-        // trigger walk animation in movement vector > 0
-        if (moveDir.x != 0 || moveDir.y != 0)
-            animator.SetBool("IsWalking", true);
-        else
-            animator.SetBool("IsWalking", false);
-
         // handle wrestlers' depth
         if (opponent.transform.position.y - phys.position.y < 0)
             rend.sortingOrder = 0;
         else
             rend.sortingOrder = 2;
+        
+        if (!stunned)
+        {
+            // flip up or down animations depending on opponent location
+            animator.SetFloat("Ydiff", opponent.transform.position.y - phys.position.y);
+            
+            // trigger walk animation in movement vector > 0
+            if (moveDir.x != 0 || moveDir.y != 0)
+                animator.SetBool("IsWalking", true);
+            else
+                animator.SetBool("IsWalking", false);
 
-        // flip left or right animations depending on opponent location
-        if (opponent.transform.position.x - phys.position.x < 0)
-            rend.flipX = true;
-        else
-            rend.flipX = false;
+            // flip left or right animations depending on opponent location
+            if (opponent.transform.position.x - phys.position.x < 0)
+                rend.flipX = true;
+            else
+                rend.flipX = false;
+        }
     }
 
     private void FixedUpdate()
@@ -72,6 +88,21 @@ public class Wrestler : MonoBehaviour, ILossSubject
         phys.MovePosition(newPos);
     }
 
+    IEnumerator IStunned()
+    {
+        Debug.Log("stunned");
+        stunned = true;
+        yield return new WaitForSeconds(.5f);
+        stunned = false;
+        Debug.Log("not stunned");
+    }
+
+    public void Stunned()
+    {
+        if (!stunned)
+            StartCoroutine(IStunned());
+    }
+
     public void LoseStrength(int loss)
     {
         if (strength <= loss)
@@ -86,17 +117,31 @@ public class Wrestler : MonoBehaviour, ILossSubject
 
     public void Punch()
     {
-        animator.SetTrigger("Punch");
+        if (!stunned)
+        {
+            animator.SetTrigger("Punch");
+            float xDiff = Mathf.Abs(phys.position.x - opponent.phys.position.x);
+            float yDiff = Mathf.Abs(phys.position.y - opponent.phys.position.y);
+            if (xDiff <= maxHitX && yDiff <= maxHitY)
+                opponent.Hit(punchDamage);
+        }
     }
 
     public void Kick()
     {
-        animator.SetTrigger("Kick");
+        if (!stunned)
+        {
+            animator.SetTrigger("Kick");
+            if (phys.position.x - opponent.phys.position.x <= maxHitX)
+                opponent.Hit(kickDamage);
+        }
     }
 
-    public void Hit()
+    public void Hit(int damage)
     {
-        animator.SetTrigger("Hit");
+        // animator.SetTrigger("Hit");
+        Stunned();
+        LoseStrength(damage);
     }
 
     public void Pin()
