@@ -293,11 +293,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 488635855}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 1}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -59.100006, y: -10.529999}
-  m_SizeDelta: {x: 47, y: 15}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 1, y: 0.5}
+  m_AnchorMax: {x: 1, y: 0.5}
+  m_AnchoredPosition: {x: -35.5, y: 85.5}
+  m_SizeDelta: {x: 80, y: 15}
+  m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &596663653
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -318,7 +318,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a6539eadf0e8a2b42ad8ba2750049d0d, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -393,7 +393,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: d8757c0104a28464eb0b6124edb15a82, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -499,7 +499,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 784a6f7a4586c8f408c534eb48019ebd, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -664,19 +664,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc42dc97ed539e542a075eace751a5d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  RingPrefab: {fileID: 1254735592920489029, guid: c95b83723e8a0134b9ebe25b3b7670fc, type: 3}
-  CagePrefab: {fileID: 99436245740292618, guid: e7e61c38188e0d24bba03e7c4cfcf261, type: 3}
-  RingSpawn: {fileID: 855821999}
-  ring: {fileID: 0}
-  boundary: {fileID: 0}
   WASDInputPrefab: {fileID: 1621239305744883809, guid: d00211d63628eee4abadbe40eb7221fe, type: 3}
-  ArrowInputPrefab: {fileID: 8895779617594799048, guid: 501222533ed27d94a9a929e2efd75ef5, type: 3}
+  arrowsInputPrefab: {fileID: 8895779617594799048, guid: 501222533ed27d94a9a929e2efd75ef5, type: 3}
   AIInputPrefab: {fileID: 3006057460160789273, guid: 38fe8b41a9f3aa94db4892754b8917f0, type: 3}
-  WrestlerPrefab: {fileID: 2428319824450385115, guid: 4ff76369249c83d40b03ab948531ee8c, type: 3}
-  Wrestler1Spawn: {fileID: 326129791}
-  Wrestler2Spawn: {fileID: 1099239252}
+  ringPrefab: {fileID: 1254735592920489029, guid: c95b83723e8a0134b9ebe25b3b7670fc, type: 3}
+  cagePrefab: {fileID: 99436245740292618, guid: e7e61c38188e0d24bba03e7c4cfcf261, type: 3}
+  wrestlerPrefab: {fileID: 2428319824450385115, guid: 4ff76369249c83d40b03ab948531ee8c, type: 3}
+  ringSpawn: {fileID: 855821999}
+  wrestler1Spawn: {fileID: 326129791}
+  wrestler2Spawn: {fileID: 1099239252}
+  portrait1: {fileID: 694285768}
+  portrait2: {fileID: 926743769}
+  name1: {fileID: 2055653788}
+  name2: {fileID: 596663653}
   strength1: {fileID: 1221668589}
   strength2: {fileID: 2089699535}
+  ring: {fileID: 0}
+  boundary: {fileID: 0}
 --- !u!1 &1106404124
 GameObject:
   m_ObjectHideFlags: 0
@@ -1062,11 +1066,11 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 488635855}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 55, y: -10.529999}
-  m_SizeDelta: {x: 39, y: 15}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0.5}
+  m_AnchorMax: {x: 0, y: 0.5}
+  m_AnchoredPosition: {x: 35.5, y: 85.5}
+  m_SizeDelta: {x: 80, y: 15}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &2055653788
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1087,7 +1091,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 7ee5942cbd4ff3945aad0881855f68b1, type: 3}
+  m_Sprite: {fileID: 0}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1141,7 +1145,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -65.600006, y: -22.5}
+  m_AnchoredPosition: {x: -65.5, y: -22.5}
   m_SizeDelta: {x: 60, y: 4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2089699534

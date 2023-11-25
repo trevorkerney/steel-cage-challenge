@@ -48,12 +48,13 @@ public class Wrestler : MonoBehaviour, ILossSubject
         else
             rend.sortingOrder = 2;
         
-        if (!stunned)
+        // disable most animations if player is stunned or pinned
+        if (!stunned && !pinned)
         {
             // flip up or down animations depending on opponent location
-            animator.SetFloat("Ydiff", opponent.transform.position.y - phys.position.y);
+            animator.SetFloat("Ydiff", opponent.transform.position.y - transform.position.y);
             
-            // trigger walk animation in movement vector > 0
+            // trigger walk animation if movement vector > 0
             if (moveDir.x != 0 || moveDir.y != 0)
                 animator.SetBool("IsWalking", true);
             else
@@ -72,20 +73,23 @@ public class Wrestler : MonoBehaviour, ILossSubject
         // delegate input to controller
         controller.Delegate(this);
 
-        // apply motion vector
-        moveDir.Normalize();
-        Vector2 newPos = moveSpeed * moveDir + phys.position;
-        newPos.x = Mathf.Clamp(
-            newPos.x,
-            boundary.bounds.min.x + body.bounds.size.x / 2,
-            boundary.bounds.max.x - body.bounds.size.x / 2
-        );
-        newPos.y = Mathf.Clamp(
-            newPos.y,
-            boundary.bounds.min.y + body.bounds.size.y / 2,
-            boundary.bounds.max.y - body.bounds.size.y / 2
-        );
-        phys.MovePosition(newPos);
+        // if not stunned or pinned, apply motion vector
+        if (!stunned && !pinned)
+        {
+            moveDir.Normalize();
+            Vector2 newPos = moveSpeed * moveDir + phys.position;
+            newPos.x = Mathf.Clamp(
+                newPos.x,
+                boundary.bounds.min.x + body.bounds.size.x / 2,
+                boundary.bounds.max.x - body.bounds.size.x / 2
+            );
+            newPos.y = Mathf.Clamp(
+                newPos.y,
+                boundary.bounds.min.y + body.bounds.size.y / 2,
+                boundary.bounds.max.y - body.bounds.size.y / 2
+            );
+            phys.MovePosition(newPos);
+        }
     }
 
     IEnumerator IStunned()

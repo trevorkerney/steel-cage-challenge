@@ -3810,10 +3810,14 @@ MonoBehaviour:
   - name: Hulk Hogan
     portrait: {fileID: 21300000, guid: d8757c0104a28464eb0b6124edb15a82, type: 3}
     nameSprite: {fileID: 21300000, guid: afca24261b65bc94ba349f988ff103da, type: 3}
+    gameNameLeft: {fileID: 21300000, guid: 7ee5942cbd4ff3945aad0881855f68b1, type: 3}
+    gameNameRight: {fileID: 21300000, guid: 712547408dd78c14f89c2e3f1ebbfd66, type: 3}
     animator: {fileID: 9100000, guid: 17982a91a3e57c34f9e03c3b6f87a3ca, type: 2}
   - name: Randy Savage
     portrait: {fileID: 21300000, guid: 784a6f7a4586c8f408c534eb48019ebd, type: 3}
     nameSprite: {fileID: 21300000, guid: 5f255d173987dbd4085db2a42ee4b4a5, type: 3}
+    gameNameLeft: {fileID: 21300000, guid: f8d7286d31724974e85bd00ac94a3a1b, type: 3}
+    gameNameRight: {fileID: 21300000, guid: a6539eadf0e8a2b42ad8ba2750049d0d, type: 3}
     animator: {fileID: 9100000, guid: 17982a91a3e57c34f9e03c3b6f87a3ca, type: 2}
   option1: 0
   option2: 0

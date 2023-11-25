@@ -32,6 +32,8 @@ public class WrestlerOption
     public string name;
     public Sprite portrait;
     public Sprite nameSprite;
+    public Sprite gameNameLeft;
+    public Sprite gameNameRight;
     public RuntimeAnimatorController animator;
 }
 

@@ -1,29 +1,35 @@
-using TreeEditor;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Match : MonoBehaviour
 {
     private Session session;
 
-    public GameObject RingPrefab;
-    public GameObject CagePrefab;
-    public Transform RingSpawn;
+    // prefabs of objects spawned at runtime (rings, wrestlers, controllers)
+    public WASDController WASDInputPrefab;
+    public ArrowController arrowsInputPrefab;
+    public AIController AIInputPrefab;
+    public GameObject ringPrefab;
+    public GameObject cagePrefab;
+    public Wrestler wrestlerPrefab;
+
+    // spawn points for objects spawned at runtime
+    public Transform ringSpawn;
+    public Transform wrestler1Spawn;
+    public Transform wrestler2Spawn;
+
+    // UI elements configured at runtime
+    public Image portrait1;
+    public Image portrait2;
+    public Image name1;
+    public Image name2;
+    public StrengthBar strength1;
+    public StrengthBar strength2;
 
     [HideInInspector]
     public GameObject ring;
     [HideInInspector]
     public BoxCollider2D boundary;
-
-    public WASDController WASDInputPrefab;
-    public ArrowController ArrowInputPrefab;
-    public AIController AIInputPrefab;
-
-    public Wrestler WrestlerPrefab;
-    public Transform Wrestler1Spawn;
-    public Transform Wrestler2Spawn;
-
-    public StrengthBar strength1;
-    public StrengthBar strength2;
     private Wrestler wrestler1;
     private Wrestler wrestler2;
     
@@ -33,20 +39,30 @@ public class Match : MonoBehaviour
 
         if (session.cage)
         {
-            ring = Instantiate(CagePrefab, RingSpawn);
+            ring = Instantiate(cagePrefab, ringSpawn);
         }
         else
         {
-            ring = Instantiate(RingPrefab, RingSpawn);
+            ring = Instantiate(ringPrefab, ringSpawn);
         }
 
         boundary = ring.transform.Find("Background").GetComponent<BoxCollider2D>();
 
-        // instantiate wrestlers at their spawn points
-        wrestler1 = Instantiate(WrestlerPrefab, transform);
-        wrestler2 = Instantiate(WrestlerPrefab, transform);
+        portrait1.sprite = session.wrestlers[session.option1].portrait;
+        portrait1.SetNativeSize();
+        portrait2.sprite = session.wrestlers[session.option2].portrait;
+        portrait2.SetNativeSize();
 
-        // assign animator controllers
+        name1.sprite = session.wrestlers[session.option1].gameNameLeft;
+        name1.SetNativeSize();
+        name2.sprite = session.wrestlers[session.option2].gameNameRight;
+        name2.SetNativeSize();
+
+        // instantiate wrestlers at their spawn points
+        wrestler1 = Instantiate(wrestlerPrefab, transform);
+        wrestler2 = Instantiate(wrestlerPrefab, transform);
+
+        // assign animator controllers based on selected wrestlers
         wrestler1.animator.runtimeAnimatorController = session.wrestlers[session.option1].animator;
         wrestler2.animator.runtimeAnimatorController = session.wrestlers[session.option2].animator;
 
@@ -67,7 +83,7 @@ public class Match : MonoBehaviour
         if (session.player2 != null)
         {
             // arrow input controller if player 2 logged in
-            wrestler2.controller = Instantiate(ArrowInputPrefab, transform);
+            wrestler2.controller = Instantiate(arrowsInputPrefab, transform);
         }
         else
         {
