@@ -64,18 +64,32 @@ public class Database : MonoBehaviour
         command.CommandText = "INSERT OR REPLACE INTO Account (username, password) VALUES ('" + username + "', '" + hash.ToString() + "')";
         if (command.ExecuteNonQuery() != 1)
         {
-            Debug.Log("There was an unexpected error in CreateUser.");
+            Debug.Log("There was an unexpected error in Register.");
             return false;
         }
         return true;
     }
 
     public bool RecordWin(string username) {
-        return false;
+        IDbCommand command = conn.CreateCommand();
+        command.CommandText = "UPDATE Account SET wins = wins + 1 WHERE username = '" + username + "'";
+        if (command.ExecuteNonQuery() != 1)
+        {
+            Debug.Log("There was an unexpected error in RecordWin.");
+            return false;
+        }
+        return true;
     }
 
     public bool RecordLoss(string username) {
-        return false;
+        IDbCommand command = conn.CreateCommand();
+        command.CommandText = "UPDATE Account SET losses = losses + 1 WHERE username = '" + username + "'";
+        if (command.ExecuteNonQuery() != 1)
+        {
+            Debug.Log("There was an unexpected error in RecordLoss.");
+            return false;
+        }
+        return true;
     }
 
     public bool RecordTime(string username, int ms) {

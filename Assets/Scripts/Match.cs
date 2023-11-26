@@ -1,8 +1,11 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class Match : MonoBehaviour
+public class Match : MonoBehaviour, ILossObserver
 {
+    private Database db;
     private Session session;
 
     // prefabs of objects spawned at runtime (rings, wrestlers, controllers)
@@ -35,6 +38,7 @@ public class Match : MonoBehaviour
     
     void Awake()
     {
+        db = FindObjectOfType<Database>();
         session = FindObjectOfType<Session>();
 
         if (session.cage)
@@ -48,23 +52,36 @@ public class Match : MonoBehaviour
 
         boundary = ring.transform.Find("Background").GetComponent<BoxCollider2D>();
 
-        portrait1.sprite = session.wrestlers[session.option1].portrait;
+        if (!session.option1.HasValue || !session.option2.HasValue)
+        {
+            return;
+        }
+
+        portrait1.sprite = session.wrestlers[session.option1.Value].portrait;
         portrait1.SetNativeSize();
-        portrait2.sprite = session.wrestlers[session.option2].portrait;
+        portrait2.sprite = session.wrestlers[session.option2.Value].portrait;
         portrait2.SetNativeSize();
 
-        name1.sprite = session.wrestlers[session.option1].gameNameLeft;
+        name1.sprite = session.wrestlers[session.option1.Value].gameNameLeft;
         name1.SetNativeSize();
-        name2.sprite = session.wrestlers[session.option2].gameNameRight;
+        name2.sprite = session.wrestlers[session.option2.Value].gameNameRight;
         name2.SetNativeSize();
 
         // instantiate wrestlers at their spawn points
         wrestler1 = Instantiate(wrestlerPrefab, transform);
         wrestler2 = Instantiate(wrestlerPrefab, transform);
 
+        // match observes the wrestlers for a win condition
+        wrestler1.AddObserver(this);
+        wrestler2.AddObserver(this);
+
+        // assign username of each player to wrestler
+        wrestler1.username = session.player1.username;
+        wrestler2.username = session.player2.username;
+
         // assign animator controllers based on selected wrestlers
-        wrestler1.animator.runtimeAnimatorController = session.wrestlers[session.option1].animator;
-        wrestler2.animator.runtimeAnimatorController = session.wrestlers[session.option2].animator;
+        wrestler1.animator.runtimeAnimatorController = session.wrestlers[session.option1.Value].animator;
+        wrestler2.animator.runtimeAnimatorController = session.wrestlers[session.option2.Value].animator;
 
         // assign opponent references
         wrestler1.opponent = wrestler2;
@@ -94,10 +111,24 @@ public class Match : MonoBehaviour
         strength2.slider.value = wrestler2.strength;
     }
 
-    void OnDestroy()
+    IEnumerator EndMatch()
+    {
+        yield return new WaitForSeconds(3f);
+        // fade to black?
+        SceneManager.LoadScene("StartMenu");
+    }
+
+    public void Acknowledge(string winner, string loser)
     {
         Destroy(wrestler1.controller as Object);
         Destroy(wrestler2.controller as Object);
+        db.RecordWin(winner);
+        db.RecordLoss(loser);
+        StartCoroutine(EndMatch());
+    }
+
+    void OnDestroy()
+    {
         Destroy(wrestler1);
         Destroy(wrestler2);
     }

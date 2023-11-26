@@ -45,16 +45,16 @@ public class Session : MonoBehaviour
     public Account player2;
 
     [HideInInspector]
-    public Category category;
+    public Category? category;
 
     [HideInInspector]
-    public Gamemode gamemode;
+    public Gamemode? gamemode;
 
     public List<WrestlerOption> wrestlers;
     [HideInInspector]
-    public int option1;
+    public int? option1;
     [HideInInspector]
-    public int option2;
+    public int? option2;
 
     [HideInInspector]
     public bool cage = false;
@@ -68,5 +68,14 @@ public class Session : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
+    }
+
+    public void Refresh()
+    {
+        category = null;
+        gamemode = null;
+        option1 = null;
+        option2 = null;
+        cage = false;
     }
 }

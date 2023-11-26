@@ -1,4 +1,4 @@
 public interface ILossObserver
 {
-    public void Update(int player);
+    public void Acknowledge(string winner, string loser);
 }

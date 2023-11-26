@@ -12,6 +12,7 @@ public class StartMenu : MonoBehaviour
     void Awake()
     {
         session = FindObjectOfType<Session>();
+        session.Refresh();
     }
 
     void Update()

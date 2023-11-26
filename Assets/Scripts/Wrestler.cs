@@ -1,9 +1,13 @@
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Wrestler : MonoBehaviour, ILossSubject
 {
     public IWrestlerController controller;
+
+    private List<ILossObserver> lossObservers = new();
     
     // defined at runtime
     [HideInInspector]
@@ -41,7 +45,7 @@ public class Wrestler : MonoBehaviour, ILossSubject
     bool stunned = false;
     bool punching = false;
     bool kicking = false;
-    int numDrops = 0;
+    public int numDrops = 0;
     int numPins = 0;
     int getUp = 0;
 
@@ -73,7 +77,7 @@ public class Wrestler : MonoBehaviour, ILossSubject
         }
     }
 
-    private void FixedUpdate()
+    void FixedUpdate()
     {
         // delegate input to controller
         controller.Delegate(this);
@@ -124,7 +128,9 @@ public class Wrestler : MonoBehaviour, ILossSubject
         if (animator.GetBool("IsPinning") && numPins == pinNum)
         {
             Notify(username, opponent.username);
+            animator.SetBool("IsWinner", true);
             animator.SetBool("IsPinning", false);
+            opponent.numDrops = int.MaxValue;
         }
     }
 
@@ -208,7 +214,7 @@ public class Wrestler : MonoBehaviour, ILossSubject
 
     public void Kick()
     {
-        if (!stunned && !animator.GetBool("IsLaying") && !punching && !kicking)
+        if (!stunned && !animator.GetBool("IsLaying") && !animator.GetBool("IsPinning") && !punching && !kicking)
         {
             animator.SetTrigger("Kick");
             StartCoroutine(IKicking());
@@ -238,16 +244,19 @@ public class Wrestler : MonoBehaviour, ILossSubject
 
     public void AddObserver(ILossObserver observer)
     {
-
+        lossObservers.Add(observer);
     }
 
     public void RemoveObserver(ILossObserver observer)
     {
-        
+        lossObservers.Remove(observer);
     }
 
     public void Notify(string winner, string loser)
     {
-
+        foreach (var obs in lossObservers)
+        {
+            obs.Acknowledge(username, opponent.username);
+        }
     }
 }
