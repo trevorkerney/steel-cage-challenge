@@ -1,5 +1,4 @@
 using System.Collections;
-using System.ComponentModel;
 using UnityEngine;
 
 public class Wrestler : MonoBehaviour, ILossSubject
@@ -8,7 +7,7 @@ public class Wrestler : MonoBehaviour, ILossSubject
     
     // defined at runtime
     [HideInInspector]
-    public Match match;
+    public string username;
     [HideInInspector]
     public BoxCollider2D boundary;
     [HideInInspector]
@@ -23,33 +22,39 @@ public class Wrestler : MonoBehaviour, ILossSubject
     private Rigidbody2D phys;
     [SerializeField]
     private BoxCollider2D body;
-
     [SerializeField]
+    private float maxHitXDist = .2f;
+    [SerializeField]
+    private float maxHitYDist = .1f;
+    [SerializeField]
+    private int punchDamage = 3;
+    [SerializeField]
+    private int kickDamage = 6;
+
+    [HideInInspector]
     public int strength = 100;
     [SerializeField]
     private float moveSpeed = 0.02f;
     [HideInInspector]
     public Vector2 moveDir = Vector2.zero;
 
-    float maxHitX = .2f;
-    float maxHitY = .1f;
-
     bool stunned = false;
-    bool pinned = false;
-
-    int punchDamage = 5;
-    int kickDamage = 10;
+    bool punching = false;
+    bool kicking = false;
+    int numDrops = 0;
+    int numPins = 0;
+    int getUp = 0;
 
     void Update()
     {
         // handle wrestlers' depth
-        if (opponent.transform.position.y - phys.position.y < 0)
+        if (opponent.transform.position.y - transform.position.y < 0)
             rend.sortingOrder = 0;
         else
             rend.sortingOrder = 2;
         
-        // disable most animations if player is stunned or pinned
-        if (!stunned && !pinned)
+        // disable most animations if player is stunned, laying, or pinning
+        if (!stunned && !animator.GetBool("IsLaying") && !animator.GetBool("IsPinning"))
         {
             // flip up or down animations depending on opponent location
             animator.SetFloat("Ydiff", opponent.transform.position.y - transform.position.y);
@@ -61,7 +66,7 @@ public class Wrestler : MonoBehaviour, ILossSubject
                 animator.SetBool("IsWalking", false);
 
             // flip left or right animations depending on opponent location
-            if (opponent.transform.position.x - phys.position.x < 0)
+            if (opponent.transform.position.x - transform.position.x < 0)
                 rend.flipX = true;
             else
                 rend.flipX = false;
@@ -73,8 +78,8 @@ public class Wrestler : MonoBehaviour, ILossSubject
         // delegate input to controller
         controller.Delegate(this);
 
-        // if not stunned or pinned, apply motion vector
-        if (!stunned && !pinned)
+        // if not stunned, laying, or pinning, apply motion vector
+        if (!stunned && !animator.GetBool("IsLaying") && !animator.GetBool("IsPinning"))
         {
             moveDir.Normalize();
             Vector2 newPos = moveSpeed * moveDir + phys.position;
@@ -94,63 +99,141 @@ public class Wrestler : MonoBehaviour, ILossSubject
 
     IEnumerator IStunned()
     {
-        Debug.Log("stunned");
         stunned = true;
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.3f);
         stunned = false;
-        Debug.Log("not stunned");
+    }
+    
+    IEnumerator IPunching()
+    {
+        punching = true;
+        yield return new WaitForSeconds(.5f);
+        punching = false;
+    }
+
+    IEnumerator IKicking()
+    {
+        kicking = true;
+        yield return new WaitForSeconds(.6f);
+        kicking = false;
+    }
+
+    IEnumerator IPinning(int pinNum)
+    {
+        yield return new WaitForSeconds(3f);
+        if (animator.GetBool("IsPinning") && numPins == pinNum)
+        {
+            Notify(username, opponent.username);
+            animator.SetBool("IsPinning", false);
+        }
     }
 
     public void Stunned()
     {
-        if (!stunned)
+        if (!stunned && !animator.GetBool("IsLaying"))
+        {
+            animator.SetTrigger("Stun");
             StartCoroutine(IStunned());
+        }
     }
 
     public void LoseStrength(int loss)
     {
         if (strength <= loss)
-        {
             strength = 0;
-        }
         else
-        {
             strength -= loss;
+    }
+
+    public void Pin()
+    {
+        if (!stunned && !animator.GetBool("IsLaying") && !animator.GetBool("IsPinning") && !punching && !kicking)
+        {
+            float xDiff = Mathf.Abs(transform.position.x - opponent.transform.position.x);
+            float yDiff = Mathf.Abs(transform.position.y - opponent.transform.position.y);
+            if (xDiff <= maxHitXDist && yDiff <= maxHitYDist)
+            {
+                animator.SetBool("IsPinning", true);
+                Vector2 newPos = opponent.transform.position;
+                newPos.y -= .001f;
+                transform.position = newPos;
+                rend.flipX = !opponent.rend.flipX;
+                StartCoroutine(IPinning(++numPins));
+            }
         }
+    }
+
+    public void Laid()
+    {
+        animator.SetBool("IsLaying", true);
+        if (numDrops == 0)
+            strength = 50;
+        numDrops++;
+    }
+
+    public void GetUp()
+    {
+        if (++getUp >= 18 + 3 * numDrops)
+        {
+            animator.SetBool("IsLaying", false);
+            opponent.animator.SetBool("IsPinning", false);
+            getUp = 0;
+        }
+    }
+
+    public void ActionA()
+    {
+        if (animator.GetBool("IsLaying"))
+            GetUp();
+        else if (opponent.animator.GetBool("IsLaying"))
+            Pin();
+        else
+            Punch();
+    }
+
+    public void ActionB()
+    {
+        Kick();
     }
 
     public void Punch()
     {
-        if (!stunned)
+        if (!stunned && !animator.GetBool("IsLaying") && !punching && !kicking)
         {
             animator.SetTrigger("Punch");
-            float xDiff = Mathf.Abs(phys.position.x - opponent.phys.position.x);
-            float yDiff = Mathf.Abs(phys.position.y - opponent.phys.position.y);
-            if (xDiff <= maxHitX && yDiff <= maxHitY)
-                opponent.Hit(punchDamage);
+            StartCoroutine(IPunching());
+            opponent.Hit(punchDamage);
         }
     }
 
     public void Kick()
     {
-        if (!stunned)
+        if (!stunned && !animator.GetBool("IsLaying") && !punching && !kicking)
         {
             animator.SetTrigger("Kick");
-            if (phys.position.x - opponent.phys.position.x <= maxHitX)
-                opponent.Hit(kickDamage);
+            StartCoroutine(IKicking());
+            opponent.Hit(kickDamage);
         }
     }
 
     public void Hit(int damage)
     {
-        // animator.SetTrigger("Hit");
-        Stunned();
-        LoseStrength(damage);
-    }
-
-    public void Pin()
-    {
-
+        float xDiff = Mathf.Abs(transform.position.x - opponent.transform.position.x);
+        float yDiff = Mathf.Abs(transform.position.y - opponent.transform.position.y);
+        if (xDiff <= maxHitXDist && yDiff <= maxHitYDist)
+        {
+            if (strength > 0)
+            {
+                Stunned();
+                LoseStrength(damage);
+            }
+            else if (!animator.GetBool("IsLaying"))
+            {
+                Laid();
+                return;
+            }
+            // play hit sound effect
+        }
     }
 
     public void AddObserver(ILossObserver observer)
@@ -163,7 +246,7 @@ public class Wrestler : MonoBehaviour, ILossSubject
         
     }
 
-    public void Notify(int player)
+    public void Notify(string winner, string loser)
     {
 
     }

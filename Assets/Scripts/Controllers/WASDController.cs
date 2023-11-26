@@ -42,7 +42,7 @@ public class WASDController : MonoBehaviour, IWrestlerController
         if (AInput.ReadValue<float>() == 1f && !isAInputHeld)
         {
             isAInputHeld = true;
-            wrestler.Punch();
+            wrestler.ActionA();
         }
         else if (AInput.ReadValue<float>() == 0f)
         {
@@ -52,7 +52,7 @@ public class WASDController : MonoBehaviour, IWrestlerController
         if (BInput.ReadValue<float>() == 1f && !isBInputHeld)
         {
             isBInputHeld = true;
-            wrestler.Kick();
+            wrestler.ActionB();
         }
         else if (BInput.ReadValue<float>() == 0f)
         {

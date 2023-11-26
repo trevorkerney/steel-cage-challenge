@@ -74,10 +74,6 @@ public class Match : MonoBehaviour
         wrestler1.boundary = boundary;
         wrestler2.boundary = boundary;
 
-        // assign match references
-        wrestler1.match = this;
-        wrestler2.match = this;
-
         // assign controllers depending on how many players are logged in
         wrestler1.controller = Instantiate(WASDInputPrefab, transform);
         if (session.player2 != null)
