@@ -61,6 +61,11 @@ public class RegisterMenu : MonoBehaviour
         }
         else if (session.player2 == null)
         {
+            if (username == session.player1.username)
+            {
+                Debug.Log(username + "is already logged in.");
+                return;
+            }
             session.player2 = new Account(username);
         }
         else
