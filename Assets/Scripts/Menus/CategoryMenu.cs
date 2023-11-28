@@ -35,6 +35,12 @@ public class CategoryMenu : MonoBehaviour
         }
     }
 
+    public void Back()
+    {
+        session.category = null;
+        SceneManager.LoadScene("StartMenu");
+    }
+
     public void SetCategory(string category)
     {
         switch (category)

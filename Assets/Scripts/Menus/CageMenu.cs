@@ -10,6 +10,12 @@ public class CageMenu : MonoBehaviour
         session = FindObjectOfType<Session>();
     }
 
+    public void Back()
+    {
+        session.cage = false;
+        SceneManager.LoadScene("ModeMenu");
+    }
+
     public void SetCage(bool cage)
     {
         session.cage = cage;

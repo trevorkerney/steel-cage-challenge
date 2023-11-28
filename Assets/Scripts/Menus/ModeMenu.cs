@@ -41,6 +41,12 @@ public class ModeMenu : MonoBehaviour
         }
     }
 
+    public void Back()
+    {
+        session.gamemode = null;
+        SceneManager.LoadScene("CategoryMenu");
+    }
+
     public void SetMode(string mode)
     {
         switch (mode)

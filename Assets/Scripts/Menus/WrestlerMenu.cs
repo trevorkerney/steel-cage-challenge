@@ -51,6 +51,7 @@ public class WrestlerMenu : MonoBehaviour
 
     void IncrementP1Selection()
     {
+        int prev = p1Selection;
         do
         {
             if (p1Selection + 1 < session.wrestlers.Count)
@@ -58,7 +59,8 @@ public class WrestlerMenu : MonoBehaviour
             else
                 p1Selection = 0;
         } while (p1Selection == p2Selection);
-        UpdateP1Selection();
+        if (p1Selection != prev)
+            UpdateP1Selection();
     }
 
     void DecrementP1Selection()
@@ -91,6 +93,7 @@ public class WrestlerMenu : MonoBehaviour
 
     void DecrementP2Selection()
     {
+        int prev = p2Selection;
         do
         {
             if (p2Selection - 1 >= 0)
@@ -98,7 +101,8 @@ public class WrestlerMenu : MonoBehaviour
             else
                 p2Selection = session.wrestlers.Count - 1;
         } while (p2Selection == p1Selection);
-        UpdateP2Selection();
+        if (p2Selection != prev)
+            UpdateP2Selection();
     }
 
     void Update()
