@@ -60,7 +60,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: d4497889385694c46b204d90832a9261, type: 2}
+    m_Motion: {fileID: 7400000, guid: 888ed44ff2cec1c4dae91f7cf5564884, type: 2}
     m_Threshold: -1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -68,7 +68,7 @@ BlendTree:
     m_DirectBlendParameter: Ydiff
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 1e92c18174be507488b55809fe39e4a5, type: 2}
+    m_Motion: {fileID: 7400000, guid: 1fef79784cbce594ca4b794ff881d2ff, type: 2}
     m_Threshold: 1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -116,7 +116,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: e7271d230f92d7c4eb75f744a2adb6e7, type: 2}
+    m_Motion: {fileID: 7400000, guid: d939f71e65024b84283c00db2c6e3add, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -186,7 +186,7 @@ AnimatorStateMachine:
     m_State: {fileID: 985245044612814420}
     m_Position: {x: -280, y: 410, z: 0}
   - serializedVersion: 1
-    m_State: {fileID: 8613791428006906926}
+    m_State: {fileID: 1028461797689121306}
     m_Position: {x: -200, y: 30, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
@@ -318,7 +318,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 76555c2360cac8e4ca8c2245425c45a0, type: 2}
+    m_Motion: {fileID: 7400000, guid: 443d14f86fcbcd04ca3b74741f84ba57, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -651,7 +651,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: HulkHoganAnimator
+  m_Name: RandySavageAnimator
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Ydiff
@@ -741,6 +741,32 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
   m_TimeParameter: 
+--- !u!1102 &1028461797689121306
+AnimatorState:
+  serializedVersion: 6
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Randy Savage
+  m_Speed: 1
+  m_CycleOffset: 0
+  m_Transitions: []
+  m_StateMachineBehaviours: []
+  m_Position: {x: 50, y: 50, z: 0}
+  m_IKOnFeet: 0
+  m_WriteDefaultValues: 1
+  m_Mirror: 0
+  m_SpeedParameterActive: 0
+  m_MirrorParameterActive: 0
+  m_CycleOffsetParameterActive: 0
+  m_TimeParameterActive: 0
+  m_Motion: {fileID: 0}
+  m_Tag: 
+  m_SpeedParameter: 
+  m_MirrorParameter: 
+  m_CycleOffsetParameter: 
+  m_TimeParameter: 
 --- !u!1101 &1904860569700092381
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -791,7 +817,7 @@ AnimatorStateTransition:
   m_InterruptionSource: 0
   m_OrderedInterruption: 1
   m_CanTransitionToSelf: 1
---- !u!206 &2694192874197780040
+--- !u!206 &3180831836914609033
 BlendTree:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -800,7 +826,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 790d8c50abafaf448a1626c299791724, type: 2}
+    m_Motion: {fileID: 7400000, guid: ce76df1a6813ad741a1b59448f889cb6, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -892,7 +918,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 2694192874197780040}
+  m_Motion: {fileID: 3180831836914609033}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -907,7 +933,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 4d26f8c864b8a974aa00eac38aff5263, type: 2}
+    m_Motion: {fileID: 7400000, guid: b00e43ce57328924da2022dfe0b83f6f, type: 2}
     m_Threshold: -1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -915,7 +941,7 @@ BlendTree:
     m_DirectBlendParameter: X
     m_Mirror: 0
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 8eab4543d8b12444b979e4c7f1c3d3b6, type: 2}
+    m_Motion: {fileID: 7400000, guid: 106699190957c62459b8a4f6e3366c2b, type: 2}
     m_Threshold: 1
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -1016,7 +1042,7 @@ BlendTree:
   m_Name: LayTree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 3ce3aca5facb30b4ea3aab9fd6640b94, type: 2}
+    m_Motion: {fileID: 7400000, guid: 7c4676b5cd8295746b70cf1aee123f8e, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -1067,7 +1093,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: d8380a2472230c14e969e8fbfc723e7c, type: 2}
+    m_Motion: {fileID: 7400000, guid: d4a97a1d8b3a6db4d8e88434c76ec7af, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -1090,7 +1116,7 @@ BlendTree:
   m_Name: Blend Tree
   m_Childs:
   - serializedVersion: 2
-    m_Motion: {fileID: 7400000, guid: 7cba561c2b72274428ae94a35a4f3d6b, type: 2}
+    m_Motion: {fileID: 7400000, guid: 80c6ea18f987dae428d2a05beaa980d1, type: 2}
     m_Threshold: 0
     m_Position: {x: 0, y: 0}
     m_TimeScale: 1
@@ -1104,32 +1130,6 @@ BlendTree:
   m_UseAutomaticThresholds: 1
   m_NormalizedBlendValues: 0
   m_BlendType: 0
---- !u!1102 &8613791428006906926
-AnimatorState:
-  serializedVersion: 6
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_Name: Hulk Hogan
-  m_Speed: 1
-  m_CycleOffset: 0
-  m_Transitions: []
-  m_StateMachineBehaviours: []
-  m_Position: {x: 50, y: 50, z: 0}
-  m_IKOnFeet: 0
-  m_WriteDefaultValues: 1
-  m_Mirror: 0
-  m_SpeedParameterActive: 0
-  m_MirrorParameterActive: 0
-  m_CycleOffsetParameterActive: 0
-  m_TimeParameterActive: 0
-  m_Motion: {fileID: 0}
-  m_Tag: 
-  m_SpeedParameter: 
-  m_MirrorParameter: 
-  m_CycleOffsetParameter: 
-  m_TimeParameter: 
 --- !u!1101 &8742654211399476150
 AnimatorStateTransition:
   m_ObjectHideFlags: 1

@@ -3804,8 +3804,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ddc8cb04422a08418f2d301aea5fc7b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  category: 0
-  gamemode: 0
   wrestlers:
   - name: Hulk Hogan
     portrait: {fileID: 21300000, guid: d8757c0104a28464eb0b6124edb15a82, type: 3}
@@ -3818,9 +3816,7 @@ MonoBehaviour:
     nameSprite: {fileID: 21300000, guid: 5f255d173987dbd4085db2a42ee4b4a5, type: 3}
     gameNameLeft: {fileID: 21300000, guid: f8d7286d31724974e85bd00ac94a3a1b, type: 3}
     gameNameRight: {fileID: 21300000, guid: a6539eadf0e8a2b42ad8ba2750049d0d, type: 3}
-    animator: {fileID: 9100000, guid: 17982a91a3e57c34f9e03c3b6f87a3ca, type: 2}
-  option1: 0
-  option2: 0
+    animator: {fileID: 9100000, guid: 0b4d50f80b5512d41a1730628d98ce14, type: 2}
   cage: 0
 --- !u!4 &1518728912
 Transform:
