@@ -15,9 +15,10 @@ public class WrestlerMenu : MonoBehaviour
     private int p1Selection = -1;
     private int p2Selection = -1; 
 
-    IEnumerator Wait(float time)
+    IEnumerator LoadMatch()
     {
-        yield return new WaitForSeconds(time);
+        yield return new WaitForSeconds(1f);
+        SceneManager.LoadScene("Match");
     }
 
     private void UpdateP1Selection()
@@ -97,22 +98,36 @@ public class WrestlerMenu : MonoBehaviour
         bool p2Next = Input.GetKeyDown(KeyCode.RightArrow);
         bool cont = Input.GetKeyDown(KeyCode.Return);
 
-        if (p1Next)
-            IncrementP1Selection();
-        else if (p1Prev)
-            DecrementP1Selection();
-
-        if (p2Next)
-            IncrementP2Selection();
-        else if (p2Prev)
-            DecrementP2Selection();
-
-        if (cont && p1Selection >= 0 && p2Selection >= 0)
+        if (session.option1 == null)
         {
-            session.option1 = p1Selection;
-            session.option2 = p2Selection;
-            Wait(1f);
-            SceneManager.LoadScene("Match");
+            if (p1Next)
+                IncrementP1Selection();
+            else if (p1Prev)
+                DecrementP1Selection();
+        }
+
+        if (session.option1 != null)
+        {
+            if (p2Next)
+                IncrementP2Selection();
+            else if (p2Prev)
+                DecrementP2Selection();
+        }
+
+        if (cont)
+        {
+            if (session.option1 == null)
+            {
+                if (p1Selection >= 0)
+                {
+                    session.option1 = p1Selection;
+                }
+            }
+            else if (p2Selection >= 0)
+            {
+                session.option2 = p2Selection;
+                StartCoroutine(LoadMatch());
+            }
         }
     }
 }
