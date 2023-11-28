@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class StartMenu : MonoBehaviour
 {
     private Session session;
+    private Music music;
 
     public GameObject noPlayersInput;
     public GameObject onePlayersInput;
@@ -12,6 +13,7 @@ public class StartMenu : MonoBehaviour
     void Awake()
     {
         session = FindObjectOfType<Session>();
+        music = FindObjectOfType<Music>();
         session.Refresh();
     }
 

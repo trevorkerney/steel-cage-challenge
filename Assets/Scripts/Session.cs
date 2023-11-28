@@ -35,6 +35,7 @@ public class WrestlerOption
     public Sprite gameNameLeft;
     public Sprite gameNameRight;
     public RuntimeAnimatorController animator;
+    public AudioClip theme;
 }
 
 public class Session : MonoBehaviour

@@ -27,6 +27,8 @@ public class Wrestler : MonoBehaviour, ILossSubject
     [SerializeField]
     private BoxCollider2D body;
     [SerializeField]
+    private AudioSource hitSound;
+    [SerializeField]
     private float maxHitXDist = .2f;
     [SerializeField]
     private float maxHitYDist = .1f;
@@ -228,6 +230,7 @@ public class Wrestler : MonoBehaviour, ILossSubject
         float yDiff = Mathf.Abs(transform.position.y - opponent.transform.position.y);
         if (xDiff <= maxHitXDist && yDiff <= maxHitYDist)
         {
+            hitSound.Play();
             if (strength > 0)
             {
                 Stunned();
@@ -238,7 +241,6 @@ public class Wrestler : MonoBehaviour, ILossSubject
                 Laid();
                 return;
             }
-            // play hit sound effect
         }
     }
 

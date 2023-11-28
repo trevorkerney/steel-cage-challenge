@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class WrestlerMenu : MonoBehaviour
 {
     private Session session;
+    private Music music;
 
     public Image p1Portrait;
     public Image p1Name;
@@ -14,6 +15,15 @@ public class WrestlerMenu : MonoBehaviour
 
     private int p1Selection = -1;
     private int p2Selection = -1; 
+
+    void Awake()
+    {
+        session = FindObjectOfType<Session>();
+        music = FindObjectOfType<Music>();
+        music.theme.Stop();
+        p1Name.gameObject.SetActive(false);
+        p2Name.gameObject.SetActive(false);
+    }
 
     IEnumerator LoadMatch()
     {
@@ -26,6 +36,8 @@ public class WrestlerMenu : MonoBehaviour
         p1Portrait.sprite = session.wrestlers[p1Selection].portrait;
         p1Name.sprite = session.wrestlers[p1Selection].nameSprite;
         p1Name.gameObject.SetActive(true);
+        music.wrestler.clip = session.wrestlers[p1Selection].theme;
+        music.wrestler.Play();
     }
 
     private void UpdateP2Selection()
@@ -33,6 +45,8 @@ public class WrestlerMenu : MonoBehaviour
         p2Portrait.sprite = session.wrestlers[p2Selection].portrait;
         p2Name.sprite = session.wrestlers[p2Selection].nameSprite;
         p2Name.gameObject.SetActive(true);
+        music.wrestler.clip = session.wrestlers[p2Selection].theme;
+        music.wrestler.Play();
     }
 
     void IncrementP1Selection()
@@ -49,6 +63,7 @@ public class WrestlerMenu : MonoBehaviour
 
     void DecrementP1Selection()
     {
+        int prev = p1Selection;
         do
         {
             if (p1Selection - 1 >= 0)
@@ -56,11 +71,13 @@ public class WrestlerMenu : MonoBehaviour
             else
                 p1Selection = session.wrestlers.Count - 1;
         } while (p1Selection == p2Selection);
-        UpdateP1Selection();
+        if (p1Selection != prev)
+            UpdateP1Selection();
     }
 
     void IncrementP2Selection()
     {
+        int prev = p2Selection;
         do
         {
             if (p2Selection + 1 < session.wrestlers.Count)
@@ -68,7 +85,8 @@ public class WrestlerMenu : MonoBehaviour
             else
                 p2Selection = 0;
         } while (p2Selection == p1Selection);
-        UpdateP2Selection();
+        if (p2Selection != prev)
+            UpdateP2Selection();
     }
 
     void DecrementP2Selection()
@@ -81,13 +99,6 @@ public class WrestlerMenu : MonoBehaviour
                 p2Selection = session.wrestlers.Count - 1;
         } while (p2Selection == p1Selection);
         UpdateP2Selection();
-    }
-
-    void Awake()
-    {
-        session = FindObjectOfType<Session>();
-        p1Name.gameObject.SetActive(false);
-        p2Name.gameObject.SetActive(false);
     }
 
     void Update()
@@ -121,11 +132,13 @@ public class WrestlerMenu : MonoBehaviour
                 if (p1Selection >= 0)
                 {
                     session.option1 = p1Selection;
+                    music.wrestler.Stop();
                 }
             }
             else if (p2Selection >= 0)
             {
                 session.option2 = p2Selection;
+                music.wrestler.Stop();
                 StartCoroutine(LoadMatch());
             }
         }
