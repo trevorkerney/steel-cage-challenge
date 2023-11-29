@@ -68,8 +68,8 @@ public class Match : MonoBehaviour, ILossObserver
         name2.SetNativeSize();
 
         // instantiate wrestlers at their spawn points
-        wrestler1 = Instantiate(wrestlerPrefab, transform);
-        wrestler2 = Instantiate(wrestlerPrefab, transform);
+        wrestler1 = Instantiate(wrestlerPrefab, wrestler1Spawn);
+        wrestler2 = Instantiate(wrestlerPrefab, wrestler2Spawn);
 
         // match observes the wrestlers for a win condition
         wrestler1.AddObserver(this);
