@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 6030756692066464785}
   - component: {fileID: 8784469566780578914}
   - component: {fileID: 4299765805752771488}
-  - component: {fileID: 2428319824450385115}
   - component: {fileID: 8211186437432049925}
+  - component: {fileID: 2428319824450385115}
   m_Layer: 0
   m_Name: Wrestler
   m_TagString: Untagged
@@ -182,34 +182,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &2428319824450385115
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7798465621095579970}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9752f687810811348b70814309c9837f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  username: 
-  boundary: {fileID: 0}
-  opponent: {fileID: 0}
-  animator: {fileID: 4299765805752771488}
-  rend: {fileID: 5614925349268211125}
-  phys: {fileID: 8784469566780578914}
-  body: {fileID: 6030756692066464785}
-  hitSound: {fileID: 8211186437432049925}
-  maxHitXDist: 0.2
-  maxHitYDist: 0.1
-  punchDamage: 3
-  kickDamage: 6
-  strength: 100
-  moveSpeed: 0.02
-  moveDir: {x: 0, y: 0}
-  numDrops: 0
 --- !u!82 &8211186437432049925
 AudioSource:
   m_ObjectHideFlags: 0
@@ -306,3 +278,31 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2428319824450385115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7798465621095579970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9752f687810811348b70814309c9837f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  username: 
+  boundary: {fileID: 0}
+  opponent: {fileID: 0}
+  animator: {fileID: 4299765805752771488}
+  rend: {fileID: 5614925349268211125}
+  phys: {fileID: 8784469566780578914}
+  body: {fileID: 6030756692066464785}
+  hitSound: {fileID: 8211186437432049925}
+  maxHitXDist: 0.2
+  maxHitYDist: 0.1
+  punchDamage: 3
+  kickDamage: 6
+  strength: 100
+  moveSpeed: 0.02
+  moveDir: {x: 0, y: 0}
+  numDrops: 0

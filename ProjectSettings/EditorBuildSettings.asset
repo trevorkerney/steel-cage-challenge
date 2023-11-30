@@ -24,6 +24,9 @@ EditorBuildSettings:
     path: Assets/Scenes/CageMenu.unity
     guid: bba19f500258b6240abb79137223f4e8
   - enabled: 1
+    path: Assets/Scenes/LeaderboardMenu.unity
+    guid: adda8d0f99e91554f90b649dbcae38e2
+  - enabled: 1
     path: Assets/Scenes/WrestlerMenu.unity
     guid: 329c20b00d6eeb44f94e99d77bce32b5
   - enabled: 1

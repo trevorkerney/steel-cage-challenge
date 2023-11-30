@@ -27,7 +27,7 @@ public enum Gamemode
 }
 
 [System.Serializable]
-public class WrestlerOption
+public struct WrestlerOption
 {
     public string name;
     public Sprite portrait;

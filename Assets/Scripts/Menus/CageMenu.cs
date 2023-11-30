@@ -16,6 +16,11 @@ public class CageMenu : MonoBehaviour
         SceneManager.LoadScene("ModeMenu");
     }
 
+    public void Leaderboard()
+    {
+        SceneManager.LoadScene("LeaderboardMenu");
+    }
+
     public void SetCage(bool cage)
     {
         session.cage = cage;
