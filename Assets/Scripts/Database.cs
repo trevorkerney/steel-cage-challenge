@@ -71,8 +71,6 @@ public class Database : MonoBehaviour
         return true;
     }
 
-    // (wins + 1) / losses
-
     public bool RecordWin(string username) {
         IDbCommand command = conn.CreateCommand();
         command.CommandText = 

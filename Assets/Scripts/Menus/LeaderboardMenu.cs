@@ -122,7 +122,7 @@ public class LeaderboardMenu : MonoBehaviour
             usernames[entry].text = entries[entry].username;
             wins[entry].text = entries[entry].wins.ToString();
             losses[entry].text = entries[entry].losses.ToString();
-            wls[entry].text = entries[entry].wl.ToString();
+            wls[entry].text = entries[entry].wl.ToString("F2");
         }
     }
 
